@@ -63,8 +63,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 			getContacts: () => {
-				return getStore().contacts
-			},
+                return fetch("https://playground.4geeks.com/apis/fake/contact/agenda/tomtom", {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // Additional headers if needed
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Here, instead of returning the data, you update the store
+                    setStore({ contacts: data }); // Assuming the data is the array of contacts
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+            }
+			,
 			deleteContact: (contact) => {
 				const store = getStore();
 				// Filter the contacts to create a new array without the contact with the given email

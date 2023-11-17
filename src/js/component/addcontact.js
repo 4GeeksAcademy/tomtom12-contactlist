@@ -11,16 +11,17 @@ function ContactForm() {
     
 
     // Your fetch code here
-    fetch("https://playground.4geeks.com/apis/fake/contact/tomtom", {
+    fetch("https://playground.4geeks.com/apis/fake/contact", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fullname: fullname,
-        email: email,
-        address: address,
-        phone: phone,
+        "full_name": fullname,
+        "email": email,
+        "agenda_slug": "tomtom",
+        "address": address,
+        "phone": phone,
       }),
     })
       .then((response) => {
